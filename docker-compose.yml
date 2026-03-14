@@ -1,0 +1,52 @@
+services:
+
+  # ── MongoDB ───────────────────────────────────────────────────────────────
+  mongodb:
+    image: mongo:7-jammy
+    container_name: gto-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: gto_development
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  # ── Backend (Rails) ───────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: gto-backend
+    restart: unless-stopped
+    environment:
+      RAILS_ENV: production
+      MONGODB_URI: mongodb://mongodb:27017/gto_production
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    ports:
+      - "3000:3000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  # ── Frontend (Angular + nginx) ────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: gto-frontend
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
+    driver: local

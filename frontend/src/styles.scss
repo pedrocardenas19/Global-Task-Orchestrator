@@ -1,0 +1,130 @@
+@use '@angular/material' as mat;
+
+// ── Design tokens ──────────────────────────────────────────────────────────
+:root {
+  --bg-base:      #0d0d0f;
+  --bg-surface:   #141418;
+  --bg-elevated:  #1c1c22;
+  --border:       #2a2a35;
+  --border-hover: #3d3d50;
+
+  --accent-cyan:   #00e5ff;
+  --accent-purple: #b57bee;
+  --accent-lime:   #aaff00;
+  --accent-amber:  #ffb830;
+
+  --text-primary:   #f0f0f5;
+  --text-secondary: #8888a0;
+  --text-muted:     #55556a;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// ── Angular Material dark theme ─────────────────────────────────────────────
+html {
+  height: 100%;
+  color-scheme: dark;
+
+  @include mat.theme((
+    color: (
+      primary: mat.$cyan-palette,
+      tertiary: mat.$violet-palette,
+      theme-type: dark,
+    ),
+    typography: 'Space Grotesk',
+    density: 0,
+  ));
+}
+
+// ── Global resets & base ────────────────────────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ── Material overrides ───────────────────────────────────────────────────────
+.mat-mdc-card {
+  background-color: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: none !important;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+
+  &:hover {
+    border-color: var(--border-hover) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 229, 255, 0.06) !important;
+  }
+}
+
+.mat-mdc-form-field {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+  }
+
+  &.mat-focused .mdc-notched-outline__leading,
+  &.mat-focused .mdc-notched-outline__notch,
+  &.mat-focused .mdc-notched-outline__trailing {
+    border-color: var(--accent-cyan) !important;
+  }
+
+  input, textarea {
+    color: var(--text-primary) !important;
+    font-family: var(--font-display) !important;
+    caret-color: var(--accent-cyan) !important;
+  }
+
+  .mat-mdc-floating-label {
+    color: var(--text-secondary) !important;
+  }
+
+  &.mat-focused .mat-mdc-floating-label {
+    color: var(--accent-cyan) !important;
+  }
+}
+
+.mat-mdc-raised-button.mat-primary {
+  background: linear-gradient(135deg, #00b8d4 0%, #00e5ff 100%) !important;
+  color: #000 !important;
+  font-family: var(--font-display) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.25) !important;
+  transition: box-shadow var(--transition), transform var(--transition) !important;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 0 32px rgba(0, 229, 255, 0.45) !important;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background: var(--bg-elevated) !important;
+    color: var(--text-muted) !important;
+    box-shadow: none !important;
+  }
+}
+
+.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: var(--accent-cyan);
+}

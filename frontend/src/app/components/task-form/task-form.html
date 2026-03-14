@@ -1,0 +1,51 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="task-form" data-testid="task-form">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Title</mat-label>
+    <input
+      matInput
+      formControlName="title"
+      placeholder="Enter task title"
+      data-testid="task-title-input"
+    />
+    @if (form.get('title')?.hasError('required')) {
+      <mat-error>Title is required</mat-error>
+    }
+    @if (form.get('title')?.hasError('minlength')) {
+      <mat-error>Title must be at least 3 characters</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Enter task description (optional)"
+      rows="3"
+      data-testid="task-description-input"
+    ></textarea>
+  </mat-form-field>
+
+  @if (errorMessage) {
+    <p class="error-message" data-testid="error-message">{{ errorMessage }}</p>
+  }
+
+  <div class="form-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || isLoading"
+      data-testid="submit-button"
+    >
+      @if (isLoading) {
+        <mat-spinner diameter="18" />
+      } @else {
+        <ng-container>
+          <mat-icon>add_task</mat-icon>
+          Save
+        </ng-container>
+      }
+    </button>
+  </div>
+</form>

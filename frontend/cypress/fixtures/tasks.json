@@ -1,0 +1,12 @@
+{
+  "validTask": {
+    "title": "Deploy to production",
+    "description": "Run docker-compose up and verify all services are healthy"
+  },
+  "minimalTask": {
+    "title": "Fix bug"
+  },
+  "duplicateTask": {
+    "title": "Deploy to production"
+  }
+}

@@ -1,0 +1,8 @@
+node_modules
+dist
+.angular
+cypress/videos
+cypress/screenshots
+*.md
+.git
+.gitignore

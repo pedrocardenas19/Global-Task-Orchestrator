@@ -1,0 +1,38 @@
+@if (isLoading) {
+  <mat-progress-bar mode="indeterminate" data-testid="loading-bar" />
+}
+
+@if (tasks$ | async; as tasks) {
+  @if (tasks.length === 0 && !isLoading) {
+    <div class="empty-state" data-testid="empty-state">
+      <mat-icon>inbox</mat-icon>
+      <p>Queue is empty</p>
+      <span>Create your first task to get started</span>
+    </div>
+  }
+
+  <div class="task-grid" data-testid="task-list">
+    @for (task of tasks; track trackById($index, task)) {
+      <div class="task-card" [class.completed]="task.status === 'completed'" data-testid="task-item">
+
+        <div class="task-card-body">
+          <div class="task-status-dot" [class]="task.status"></div>
+          <div class="task-content">
+            <p class="task-title" data-testid="task-title">{{ task.title }}</p>
+            @if (task.description) {
+              <p class="task-desc" data-testid="task-description">{{ task.description }}</p>
+            }
+          </div>
+        </div>
+
+        <div class="task-card-footer">
+          <span class="task-badge" [class]="task.status" data-testid="task-status">
+            {{ task.status }}
+          </span>
+          <span class="task-date">{{ task.createdAt | date:'MMM d, h:mm a' }}</span>
+        </div>
+
+      </div>
+    }
+  </div>
+}

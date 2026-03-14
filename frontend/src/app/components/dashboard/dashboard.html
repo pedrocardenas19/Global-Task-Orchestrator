@@ -1,0 +1,42 @@
+<div class="dashboard">
+
+  <!-- Sticky header with glow line -->
+  <header class="dashboard-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-badge">GTO</span>
+        <div class="logo-text">
+          <h1>Global Task Orchestrator</h1>
+          <p>Track everything. Miss nothing.</p>
+        </div>
+      </div>
+      <div class="header-stat">
+        <span class="stat-label">system</span>
+        <span class="stat-value online">● online</span>
+      </div>
+    </div>
+    <div class="header-glow-line"></div>
+  </header>
+
+  <main class="dashboard-body">
+
+    <!-- Form section -->
+    <section class="panel form-panel">
+      <div class="panel-label">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>New task</span>
+      </div>
+      <app-task-form />
+    </section>
+
+    <!-- List section -->
+    <section class="panel list-panel">
+      <div class="panel-label">
+        <mat-icon>format_list_bulleted</mat-icon>
+        <span>Queue</span>
+      </div>
+      <app-task-list />
+    </section>
+
+  </main>
+</div>

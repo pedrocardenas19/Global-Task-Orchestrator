@@ -1,0 +1,44 @@
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .full-width {
+    width: 100%;
+
+    // Make the background of inputs match our surface
+    .mat-mdc-text-field-wrapper {
+      background-color: var(--bg-elevated) !important;
+    }
+  }
+
+  .error-message {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #ff5252;
+    margin: 0;
+    padding: 8px 12px;
+    background: rgba(255, 82, 82, 0.08);
+    border: 1px solid rgba(255, 82, 82, 0.2);
+    border-radius: var(--radius-sm);
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 4px;
+
+    button {
+      min-width: 120px;
+      height: 42px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      mat-spinner {
+        display: inline-block;
+      }
+    }
+  }
+}
