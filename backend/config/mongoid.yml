@@ -1,0 +1,29 @@
+development:
+  clients:
+    default:
+      uri: <%= ENV.fetch("MONGODB_URL", "mongodb://localhost:27017/global_task_orchestrator_development") %>
+      options:
+        server_selection_timeout: 5
+  options:
+    raise_not_found_error: true
+
+test:
+  clients:
+    default:
+      uri: <%= ENV.fetch("MONGODB_TEST_URL", "mongodb://localhost:27017/global_task_orchestrator_test") %>
+      options:
+        server_selection_timeout: 5
+        max_pool_size: 1
+        read:
+          mode: :primary
+  options:
+    raise_not_found_error: true
+
+production:
+  clients:
+    default:
+      uri: <%= ENV["MONGODB_URL"] %>
+      options:
+        server_selection_timeout: 5
+  options:
+    raise_not_found_error: true
