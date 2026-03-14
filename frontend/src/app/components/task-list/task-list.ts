@@ -27,6 +27,6 @@ export class TaskList implements OnInit {
   }
 
   trackById(_index: number, task: Task): string {
-    return task._id;
+    return task.id;
   }
 }

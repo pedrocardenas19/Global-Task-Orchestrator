@@ -1,12 +1,12 @@
 export type TaskStatus = 'pending' | 'completed';
 
 export interface Task {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   status: TaskStatus;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface CreateTaskDto {
