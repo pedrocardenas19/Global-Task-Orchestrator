@@ -1,5 +1,0 @@
-[deploy]
-startCommand = "bundle exec puma -C config/puma.rb"
-
-[[services]]
-internalPort = 8080
