@@ -2,4 +2,4 @@
 startCommand = "bundle exec puma -C config/puma.rb"
 
 [[services]]
-internalPort = 3000
+internalPort = 8080
